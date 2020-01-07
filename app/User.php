@@ -49,5 +49,25 @@ class User extends Authenticatable
 	public function getFullName()
 	{
 		return $this->first_name . ' ' . $this->last_name;
-	}    
+    } 
+
+    //valida si hay mas de 1 rol   
+    public function hasAnyRole($roles){
+    if (is_array($roles)){
+        //foreach ($role)
+    }
+        else {
+            if($this->hasRole($roles)){
+        return true;
+            }
+        }
+    }
+
+    //valida si tiene rol
+    public function hasRole ($role){
+         if ($this-> roles()->where ('name',$role)->first() ){
+             return true;
+         }
+         return false;
+    }
 }
